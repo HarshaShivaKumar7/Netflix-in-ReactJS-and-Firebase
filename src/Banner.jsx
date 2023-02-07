@@ -1,25 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "./axios";
+import requests from "./Requests";
 import "./banner.css";
 const Banner = () => {
+  const [movie, setMovie] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(requests.fetchTNetflixOriginals);
+      setMovie(
+        request.data.results[
+          Math.floor(Math.random() * request.data.results.length - 1)
+        ]
+      );
+      return request;
+    }
+    fetchData();
+  }, []);
+
+  console.log(movie);
+
+  function truncate(string, n) {
+    return string?.length > n ? string.substr(0, n - 1) + "..." : string;
+  }
+
   return (
     <header
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url('https://static0.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-03-600x239.jpg')`,
+        backgroundImage: `url('https://image.tmdb.org/t/p/original/${movie.backdrop_path}')`,
         backgroundPosition: "center center",
       }}
     >
       <div className="banner__contents">
-        <h1 className="banner__title">Avengers</h1>
+        <h1 className="banner__title">
+          {movie?.original_title || movie?.title || movie?.name}
+        </h1>
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
           <button className="banner__button">My List</button>
         </div>
         <h1 className="banner__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam maxime
-          minus eos sint provident modi veritatis culpa eaque reprehenderit
-          asperiores.
+          {truncate(`${movie.overview}`, 150)}
         </h1>
       </div>
       <div className="banner__fadeBottom" />

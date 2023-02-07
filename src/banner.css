@@ -26,6 +26,7 @@
 }
 
 .banner__fadeBottom {
+  margin-top: 150px;
   height: 7.4rem;
   background-image: linear-gradient(
     180deg,
@@ -52,6 +53,6 @@
 
 .banner__button:hover {
   color: black;
-  background-color: #e6e6e6;
+  background-color: #c1c1c1b6;
   transition: all 0.7s;
 }
