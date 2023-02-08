@@ -1,5 +1,4 @@
 const API_KEY = "e8477fa34c3426585374a1d5bda67076"; //yashas
-// const API_KEY = "a979b00d705b7632d271280a6f4ee863"; // My
 
 const requests = {
   fetchTNetflixOriginals: `/movie/top_rated/?api_key=${API_KEY}&language=en-US`,
